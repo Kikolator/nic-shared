@@ -1,0 +1,11 @@
+{
+  "name": "nic-shared",
+  "private": true,
+  "workspaces": [
+    "packages/*"
+  ],
+  "scripts": {
+    "build": "npm run build --workspaces",
+    "type-check": "npm run type-check --workspaces"
+  }
+}
