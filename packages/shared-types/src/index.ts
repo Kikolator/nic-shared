@@ -1,3 +1,3 @@
 // @nic/shared-types — root barrel export
-// Types will be added in subsequent phases
-export {};
+export type { Database, Json, Tables, TablesInsert, TablesUpdate, Enums, CompositeTypes } from './database';
+export { Constants } from './database';
