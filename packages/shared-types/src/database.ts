@@ -1,3 +1,6 @@
+// AUTO-GENERATED — DO NOT EDIT
+// Generated from nic-supabase schema. Re-run type generation after any schema change.
+
 export type Json =
   | string
   | number
