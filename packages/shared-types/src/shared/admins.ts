@@ -1,4 +1,4 @@
-import type { Database } from '../database';
+import type { Database } from '../database.js';
 
 // Row types
 export type SharedAdmin = Database['public']['Tables']['shared_admins']['Row'];

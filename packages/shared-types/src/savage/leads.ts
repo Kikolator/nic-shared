@@ -1,4 +1,4 @@
-import type { Database } from '../database';
+import type { Database } from '../database.js';
 
 // Row types
 export type SavageLead = Database['public']['Tables']['savage_leads']['Row'];
