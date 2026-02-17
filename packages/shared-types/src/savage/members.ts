@@ -55,3 +55,11 @@ export const PLAN_LABELS: Record<SavagePlanType, string> = {
   nomad: 'Nomad',
   all_star: 'All-Star',
 } as const;
+
+export const MEMBER_STATUS_LABELS: Record<SavageMemberStatus, string> = {
+  active: 'Active',
+  paused: 'Paused',
+  past_due: 'Past Due',
+  cancelled: 'Cancelled',
+  churned: 'Churned',
+} as const;

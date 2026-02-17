@@ -17,7 +17,7 @@ export function formatPrice(priceCents: number): string {
 
 /** Calculate pre-tax amount from price including IVA */
 export function getPriceExVat(priceCents: number, ivaRate: number): number {
-  return Math.round(priceCents / (1 + ivaRate));
+  return Math.round(priceCents / (1 + ivaRate / 100));
 }
 
 /** Check if a product is a subscription plan */

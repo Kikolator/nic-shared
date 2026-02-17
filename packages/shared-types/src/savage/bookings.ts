@@ -25,3 +25,12 @@ export function isCancellable(booking: SavageBooking): boolean {
     new Date(booking.start_time) > new Date()
   );
 }
+
+export const BOOKING_STATUS_LABELS: Record<SavageBookingStatus, string> = {
+  pending_payment: 'Pending Payment',
+  confirmed: 'Confirmed',
+  checked_in: 'Checked In',
+  completed: 'Completed',
+  cancelled: 'Cancelled',
+  no_show: 'No Show',
+} as const;

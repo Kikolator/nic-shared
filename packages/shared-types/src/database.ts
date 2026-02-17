@@ -1,5 +1,4 @@
 // AUTO-GENERATED — DO NOT EDIT
-// Generated from nic-supabase schema. Re-run type generation after any schema change.
 
 export type Json =
   | string
@@ -47,6 +46,7 @@ export type Database = {
           end_time: string
           id: string
           recurring_rule_id: string | null
+          reminded_at: string | null
           resource_id: string
           start_time: string
           status: Database["public"]["Enums"]["savage_booking_status"]
@@ -63,6 +63,7 @@ export type Database = {
           end_time: string
           id?: string
           recurring_rule_id?: string | null
+          reminded_at?: string | null
           resource_id: string
           start_time: string
           status?: Database["public"]["Enums"]["savage_booking_status"]
@@ -79,6 +80,7 @@ export type Database = {
           end_time?: string
           id?: string
           recurring_rule_id?: string | null
+          reminded_at?: string | null
           resource_id?: string
           start_time?: string
           status?: Database["public"]["Enums"]["savage_booking_status"]
@@ -778,6 +780,10 @@ export type Database = {
       [_ in never]: never
     }
     Functions: {
+      invoke_edge_function: {
+        Args: { function_name: string; payload?: Json }
+        Returns: undefined
+      }
       savage_auto_assign_desk: { Args: { p_pass_id: string }; Returns: string }
       savage_deduct_credits: {
         Args: {
@@ -805,6 +811,13 @@ export type Database = {
           slot_end: string
           slot_start: string
         }[]
+      }
+      shared_is_admin: {
+        Args: {
+          p_app?: Database["public"]["Enums"]["app_type"]
+          p_user_id: string
+        }
+        Returns: boolean
       }
     }
     Enums: {
