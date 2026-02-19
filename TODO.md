@@ -1,249 +1,249 @@
 # nic-shared — Implementation Todo
 
-## Phase 0: Repo Setup
+## Phase 0: Repo Setup ✅
 
-- [ ] Create GitHub repo `Kikolator/nic-shared` (private)
-- [ ] Initialize workspace root:
-  - [ ] `package.json` with `"workspaces": ["packages/*"]`
-  - [ ] `tsconfig.base.json` (strict, ES2022, ESNext, bundler resolution, declarations)
-  - [ ] `.gitignore` (node_modules, dist, .env)
-- [ ] Create package scaffolds (empty `src/index.ts` + `package.json` + `tsconfig.json`):
-  - [ ] `packages/shared-types/` — `@nic/shared-types`
-  - [ ] `packages/api-client/` — `@nic/api-client`
-  - [ ] `packages/shared-ui/` — `@nic/shared-ui`
-  - [ ] `packages/perks-sdk/` — `@nic/perks-sdk`
-- [ ] `npm install` at root — verify workspaces resolve
-- [ ] `npm run build` — verify all packages compile (empty but valid)
-- [ ] Create `CLAUDE.md` (project file — already written)
-- [ ] Create `README.md` (human-readable setup guide)
-- [ ] Initial commit + push
+- [x] Create GitHub repo `Kikolator/nic-shared` (private)
+- [x] Initialize workspace root:
+  - [x] `package.json` with `"workspaces": ["packages/*"]`
+  - [x] `tsconfig.base.json` (strict, ES2022, ESNext, bundler resolution, declarations)
+  - [x] `.gitignore` (node_modules, dist, .env)
+- [x] Create package scaffolds (empty `src/index.ts` + `package.json` + `tsconfig.json`):
+  - [x] `packages/shared-types/` — `@nic/shared-types`
+  - [x] `packages/api-client/` — `@nic/api-client`
+  - [x] `packages/shared-ui/` — `@nic/shared-ui`
+  - [x] `packages/perks-sdk/` — `@nic/perks-sdk`
+- [x] `npm install` at root — verify workspaces resolve
+- [x] `npm run build` — verify all packages compile (empty but valid)
+- [x] Create `CLAUDE.md` (project file — already written)
+- [x] Create `README.md` (human-readable setup guide)
+- [x] Initial commit + push
 
 ---
 
-## Phase 1: `@nic/shared-types` — Database Types
+## Phase 1: `@nic/shared-types` — Database Types ✅
 
 **Prerequisite**: nic-supabase Phases 1–9 complete (schema + seed exist, types can be generated).
 
 ### Auto-Generated Types
-- [ ] Copy `database.ts` from nic-supabase type generation output into `packages/shared-types/src/database.ts`
-- [ ] Add `// AUTO-GENERATED — DO NOT EDIT` header comment
-- [ ] Verify it exports `Database` type with all tables and enums
+- [x] Copy `database.ts` from nic-supabase type generation output into `packages/shared-types/src/database.ts`
+- [x] Add `// AUTO-GENERATED — DO NOT EDIT` header comment
+- [x] Verify it exports `Database` type with all tables and enums
 
 ### Verify
-- [ ] `npm run type-check --workspace=packages/shared-types` passes
-- [ ] `npm run build --workspace=packages/shared-types` produces `dist/`
+- [x] `npm run type-check --workspace=packages/shared-types` passes
+- [x] `npm run build --workspace=packages/shared-types` produces `dist/`
 
 ---
 
-## Phase 2: `@nic/shared-types` — Shared Type Helpers
+## Phase 2: `@nic/shared-types` — Shared Type Helpers ✅
 
 ### `src/shared/profiles.ts`
-- [ ] `SharedProfile` — Row type
-- [ ] `SharedProfileInsert`, `SharedProfileUpdate` — Insert/Update types
-- [ ] `FiscalIdType` — enum type
-- [ ] `hasCompleteFiscalId(profile)` — type guard: fiscal_id_type + fiscal_id + billing address all present
+- [x] `SharedProfile` — Row type
+- [x] `SharedProfileInsert`, `SharedProfileUpdate` — Insert/Update types
+- [x] `FiscalIdType` — enum type
+- [x] `hasCompleteFiscalId(profile)` — type guard: fiscal_id_type + fiscal_id + billing address all present
 
 ### `src/shared/admins.ts`
-- [ ] `SharedAdmin` — Row type
-- [ ] `AppType` — enum type
-- [ ] `isAdminOf(admins, app)` — checks if user has admin role for given app
+- [x] `SharedAdmin` — Row type
+- [x] `AppType` — enum type
+- [x] `isAdminOf(admins, app)` — checks if user has admin role for given app
 
 ### `src/shared/perks.ts`
-- [ ] `SharedPerk` — Row type
-- [ ] `SharedPerkRedemption` — Row type
-- [ ] `DiscountType` — union type ('percentage' | 'fixed' | 'freebie')
+- [x] `SharedPerk` — Row type
+- [x] `SharedPerkRedemption` — Row type
+- [x] `DiscountType` — union type ('percentage' | 'fixed' | 'freebie')
 
 ### Barrel Exports
-- [ ] `src/shared/index.ts` — re-export all shared types
-- [ ] `src/index.ts` — re-export `shared/` + `Database`
+- [x] `src/shared/index.ts` — re-export all shared types
+- [x] `src/index.ts` — re-export `shared/` + `Database`
 
 ### Verify
-- [ ] Build passes, all types accessible from root import
+- [x] Build passes, all types accessible from root import
 
 ---
 
-## Phase 3: `@nic/shared-types` — Savage Type Helpers
+## Phase 3: `@nic/shared-types` — Savage Type Helpers ✅
 
 ### `src/savage/members.ts`
-- [ ] `SavageMember`, `SavageMemberInsert`, `SavageMemberUpdate` — Row/Insert/Update
-- [ ] `SavagePlanType`, `SavageMemberStatus`, `SavageAccessLevel` — enum types
-- [ ] `SavageMemberWithProfile` — composite type (member + joined profile)
-- [ ] `isActiveMember(member)` — status === 'active'
-- [ ] `hasUnlimitedDesk(plan)` — nomad or all_star
-- [ ] `hasFixedDesk(plan)` — all_star only
-- [ ] `hasMeetingRoomAccess(plan)` — connector, explorer, nomad, all_star
-- [ ] `PLAN_ORDER` — const object for plan hierarchy (checkpoint=0, connector=1, explorer=2, nomad=3, all_star=4) — useful for upgrade/downgrade logic
-- [ ] `PLAN_LABELS` — const object for display names (all_star → "All-Star", etc.)
+- [x] `SavageMember`, `SavageMemberInsert`, `SavageMemberUpdate` — Row/Insert/Update
+- [x] `SavagePlanType`, `SavageMemberStatus`, `SavageAccessLevel` — enum types
+- [x] `SavageMemberWithProfile` — composite type (member + joined profile)
+- [x] `isActiveMember(member)` — status === 'active'
+- [x] `hasUnlimitedDesk(plan)` — nomad or all_star
+- [x] `hasFixedDesk(plan)` — all_star only
+- [x] `hasMeetingRoomAccess(plan)` — connector, explorer, nomad, all_star
+- [x] `PLAN_ORDER` — const object for plan hierarchy (checkpoint=0, connector=1, explorer=2, nomad=3, all_star=4) — useful for upgrade/downgrade logic
+- [x] `PLAN_LABELS` — const object for display names (all_star → "All-Star", etc.)
 
 ### `src/savage/bookings.ts`
-- [ ] `SavageBooking`, `SavageBookingInsert` — Row/Insert
-- [ ] `SavageBookingStatus` — enum type
-- [ ] `SavageRecurringRule` — Row type
-- [ ] `SavageRecurrencePattern` — enum type
-- [ ] `isActiveBooking(booking)` — status in (confirmed, checked_in)
-- [ ] `isCancellable(booking)` — status === 'confirmed' and start_time in future
+- [x] `SavageBooking`, `SavageBookingInsert` — Row/Insert
+- [x] `SavageBookingStatus` — enum type
+- [x] `SavageRecurringRule` — Row type
+- [x] `SavageRecurrencePattern` — enum type
+- [x] `isActiveBooking(booking)` — status in (confirmed, checked_in)
+- [x] `isCancellable(booking)` — status === 'confirmed' and start_time in future
 
 ### `src/savage/products.ts`
-- [ ] `SavageProduct` — Row type
-- [ ] `SavageProductCategory` — enum type
-- [ ] `formatPrice(priceCents)` — returns formatted string "€49.00"
-- [ ] `getPriceExVat(priceCents, ivaRate)` — calculates pre-tax amount
-- [ ] `isSubscriptionProduct(product)` — category === 'subscription'
+- [x] `SavageProduct` — Row type
+- [x] `SavageProductCategory` — enum type
+- [x] `formatPrice(priceCents)` — returns formatted string "€49.00"
+- [x] `getPriceExVat(priceCents, ivaRate)` — calculates pre-tax amount
+- [x] `isSubscriptionProduct(product)` — category === 'subscription'
 
 ### `src/savage/resources.ts`
-- [ ] `SavageResource` — Row type
-- [ ] `SavageResourceType`, `SavageResourceStatus` — enum types
-- [ ] `isBookableResource(resource)` — status === 'available'
-- [ ] `RESOURCE_TYPE_LABELS` — const object for display names
+- [x] `SavageResource` — Row type
+- [x] `SavageResourceType`, `SavageResourceStatus` — enum types
+- [x] `isBookableResource(resource)` — status === 'available'
+- [x] `RESOURCE_TYPE_LABELS` — const object for display names
 
 ### `src/savage/passes.ts`
-- [ ] `SavagePass` — Row type
-- [ ] `SavagePassType`, `SavagePassStatus` — enum types
-- [ ] `isActivePass(pass)` — status === 'active' and date within range
+- [x] `SavagePass` — Row type
+- [x] `SavagePassType`, `SavagePassStatus` — enum types
+- [x] `isActivePass(pass)` — status === 'active' and date within range
 
 ### `src/savage/credits.ts`
-- [ ] `SavageCredit` — Row type
-- [ ] `SavageCreditType`, `SavageCreditSource` — enum types
-- [ ] `formatMinutesAsHours(minutes)` — "4h 30min", "20h", etc.
+- [x] `SavageCredit` — Row type
+- [x] `SavageCreditType`, `SavageCreditSource` — enum types
+- [x] `formatMinutesAsHours(minutes)` — "4h 30min", "20h", etc.
 
 ### `src/savage/leads.ts`
-- [ ] `SavageLead` — Row type
-- [ ] `SavageLeadStatus` — enum types
-- [ ] `LEAD_STATUS_LABELS` — const object for display names
-- [ ] `isConvertibleLead(lead)` — status in (new, confirmed, completed, follow_up)
+- [x] `SavageLead` — Row type
+- [x] `SavageLeadStatus` — enum types
+- [x] `LEAD_STATUS_LABELS` — const object for display names
+- [x] `isConvertibleLead(lead)` — status in (new, confirmed, completed, follow_up)
 
 ### Barrel Exports
-- [ ] `src/savage/index.ts` — re-export all savage types
-- [ ] Update `src/index.ts` — add savage re-export
+- [x] `src/savage/index.ts` — re-export all savage types
+- [x] Update `src/index.ts` — add savage re-export
 
 ### Verify
-- [ ] Build passes
-- [ ] All types importable: `import { SavageMember, SavagePlanType, isActiveMember } from '@nic/shared-types'`
+- [x] Build passes
+- [x] All types importable: `import { SavageMember, SavagePlanType, isActiveMember } from '@nic/shared-types'`
 
 ---
 
-## Phase 4: `@nic/api-client` — Setup + Client Factory
+## Phase 4: `@nic/api-client` — Setup + Client Factory ✅
 
 **Prerequisite**: Phase 3 complete (shared-types has all Savage types).
 
 ### Dependencies
-- [ ] `npm install @supabase/supabase-js` in api-client package
-- [ ] Add `@nic/shared-types` as dependency (file reference: `"file:../shared-types"`)
+- [x] `npm install @supabase/supabase-js` in api-client package
+- [x] Add `@nic/shared-types` as dependency (file reference: `"file:../shared-types"`)
 
 ### Client Factory
-- [ ] `src/client.ts` — `createApiClient(url, key)` returns typed `SupabaseClient<Database>`
-- [ ] Export `Client` type alias: `type Client = SupabaseClient<Database>`
+- [x] `src/client.ts` — `createApiClient(url, key)` returns typed `SupabaseClient<Database>`
+- [x] Export `Client` type alias: `type Client = SupabaseClient<Database>`
 
 ### Barrel Export
-- [ ] `src/index.ts` — export client factory + Client type
+- [x] `src/index.ts` — export client factory + Client type
 
 ### Verify
-- [ ] Build passes
-- [ ] Can create typed client in a test script
+- [x] Build passes
+- [x] Can create typed client in a test script
 
 ---
 
-## Phase 5: `@nic/api-client` — Shared Queries & Mutations
+## Phase 5: `@nic/api-client` — Shared Queries & Mutations ✅
 
 ### `src/queries/shared/profiles.ts`
-- [ ] `getProfile(client, userId)` → `SharedProfile | null`
-- [ ] `getAdminStatus(client, userId, app)` → `boolean`
-- [ ] `getAdminApps(client, userId)` → `AppType[]` (which apps is user admin of)
+- [x] `getProfile(client, userId)` → `SharedProfile | null`
+- [x] `getAdminStatus(client, userId, app)` → `boolean`
+- [x] `getAdminApps(client, userId)` → `AppType[]` (which apps is user admin of)
 
 ### `src/mutations/shared/profiles.ts`
-- [ ] `updateProfile(client, userId, data)` → update name, phone, avatar, lang
-- [ ] `updateFiscalId(client, userId, data)` → update fiscal_id_type, fiscal_id, billing address fields
+- [x] `updateProfile(client, userId, data)` → update name, phone, avatar, lang
+- [x] `updateFiscalId(client, userId, data)` → update fiscal_id_type, fiscal_id, billing address fields
 
 ### Barrel Exports
-- [ ] `src/queries/shared/index.ts`
-- [ ] `src/mutations/shared/index.ts`
-- [ ] `src/queries/index.ts`
-- [ ] `src/mutations/index.ts`
-- [ ] Update `src/index.ts`
+- [x] `src/queries/shared/index.ts`
+- [x] `src/mutations/shared/index.ts`
+- [x] `src/queries/index.ts`
+- [x] `src/mutations/index.ts`
+- [x] Update `src/index.ts`
 
 ### Verify
-- [ ] Build passes
-- [ ] All query/mutation functions importable from root
+- [x] Build passes
+- [x] All query/mutation functions importable from root
 
 ---
 
-## Phase 6: `@nic/api-client` — Savage Queries
+## Phase 6: `@nic/api-client` — Savage Queries ✅
 
 ### `src/queries/savage/members.ts`
-- [ ] `getMemberByUserId(client, userId)` → `SavageMember | null`
-- [ ] `getMemberWithProfile(client, userId)` → `SavageMemberWithProfile | null`
-- [ ] `getActiveMembers(client)` → `SavageMember[]` (admin)
-- [ ] `getAllMembers(client, filters?)` → paginated, filterable by plan/status (admin)
+- [x] `getMemberByUserId(client, userId)` → `SavageMember | null`
+- [x] `getMemberWithProfile(client, userId)` → `SavageMemberWithProfile | null`
+- [x] `getActiveMembers(client)` → `SavageMember[]` (admin)
+- [x] `getAllMembers(client, filters?)` → paginated, filterable by plan/status (admin)
 
 ### `src/queries/savage/bookings.ts`
-- [ ] `getBookingsByUser(client, userId, dateRange?)` → `SavageBooking[]`
-- [ ] `getBookingsByResource(client, resourceId, date)` → `SavageBooking[]`
-- [ ] `getUpcomingBookings(client, userId)` → confirmed bookings, start_time > now
+- [x] `getBookingsByUser(client, userId, dateRange?)` → `SavageBooking[]`
+- [x] `getBookingsByResource(client, resourceId, date)` → `SavageBooking[]`
+- [x] `getUpcomingBookings(client, userId)` → confirmed bookings, start_time > now
 
 ### `src/queries/savage/resources.ts`
-- [ ] `getResources(client, type?)` → `SavageResource[]`, optionally filtered by type
-- [ ] `getDeskAvailability(client, date)` → calls `savage_get_desk_availability` RPC
-- [ ] `getRoomAvailability(client, resourceId, date)` → calls `savage_get_room_availability` RPC
+- [x] `getResources(client, type?)` → `SavageResource[]`, optionally filtered by type
+- [x] `getDeskAvailability(client, date)` → calls `savage_get_desk_availability` RPC
+- [x] `getRoomAvailability(client, resourceId, date)` → calls `savage_get_room_availability` RPC
 
 ### `src/queries/savage/products.ts`
-- [ ] `getProducts(client)` → all active products (admin)
-- [ ] `getVisibleProducts(client, plan?)` → products visible to a given plan (member store)
+- [x] `getProducts(client)` → all active products (admin)
+- [x] `getVisibleProducts(client, plan?)` → products visible to a given plan (member store)
 
 ### `src/queries/savage/passes.ts`
-- [ ] `getPassesByUser(client, userId)` → `SavagePass[]`
-- [ ] `getActivePasses(client, date)` → all active passes for a given date (admin: occupancy)
+- [x] `getPassesByUser(client, userId)` → `SavagePass[]`
+- [x] `getActivePasses(client, date)` → all active passes for a given date (admin: occupancy)
 
 ### `src/queries/savage/credits.ts`
-- [ ] `getCreditBalance(client, userId, creditType)` → calls `savage_get_credit_balance` RPC
-- [ ] `getCreditHistory(client, userId, creditType?)` → `SavageCredit[]` ordered by created_at DESC
+- [x] `getCreditBalance(client, userId, creditType)` → calls `savage_get_credit_balance` RPC
+- [x] `getCreditHistory(client, userId, creditType?)` → `SavageCredit[]` ordered by created_at DESC
 
 ### `src/queries/savage/leads.ts`
-- [ ] `getLeads(client, filters?)` → filterable by status, date range (admin)
-- [ ] `getLeadsByStatus(client, status)` → `SavageLead[]` (admin)
-- [ ] `getUpcomingTrials(client)` → leads with trial_date >= today (admin)
+- [x] `getLeads(client, filters?)` → filterable by status, date range (admin)
+- [x] `getLeadsByStatus(client, status)` → `SavageLead[]` (admin)
+- [x] `getUpcomingTrials(client)` → leads with trial_date >= today (admin)
 
 ### `src/queries/savage/stats.ts`
-- [ ] `getMonthlyStats(client, months?)` → last N months of stats (admin)
-- [ ] `getDailyStats(client, dateRange)` → daily stats for range (admin)
+- [x] `getMonthlyStats(client, months?)` → last N months of stats (admin)
+- [x] `getDailyStats(client, dateRange)` → daily stats for range (admin)
 
 ### Barrel Exports
-- [ ] `src/queries/savage/index.ts` — re-export all query files
+- [x] `src/queries/savage/index.ts` — re-export all query files
 
 ### Verify
-- [ ] Build passes
-- [ ] All savage queries importable from root
+- [x] Build passes
+- [x] All savage queries importable from root
 
 ---
 
-## Phase 7: `@nic/api-client` — Savage Mutations
+## Phase 7: `@nic/api-client` — Savage Mutations ✅
 
 ### `src/mutations/savage/bookings.ts`
-- [ ] `createBooking(client, input)` → insert booking, return created row or error
-- [ ] `cancelBooking(client, bookingId, reason?)` → set status cancelled, cancelled_at, cancel_reason
-- [ ] `checkInBooking(client, bookingId)` → set status checked_in, checked_in_at
+- [x] `createBooking(client, input)` → insert booking, return created row or error
+- [x] `cancelBooking(client, bookingId, reason?)` → set status cancelled, cancelled_at, cancel_reason
+- [x] `checkInBooking(client, bookingId)` → set status checked_in, checked_in_at
 
 ### `src/mutations/savage/passes.ts`
-- [ ] `createPass(client, input)` → insert pass with pending_payment status
-- [ ] `activatePass(client, passId)` → set status active (called after payment)
+- [x] `createPass(client, input)` → insert pass with pending_payment status
+- [x] `activatePass(client, passId)` → set status active (called after payment)
 
 ### `src/mutations/savage/leads.ts`
-- [ ] `createLead(client, input)` → insert lead
-- [ ] `updateLeadStatus(client, leadId, status, notes?)` → update status + admin_notes
-- [ ] `convertLead(client, leadId, userId)` → set status converted, converted_user_id
+- [x] `createLead(client, input)` → insert lead
+- [x] `updateLeadStatus(client, leadId, status, notes?)` → update status + admin_notes
+- [x] `convertLead(client, leadId, userId)` → set status converted, converted_user_id
 
 ### `src/mutations/savage/members.ts`
-- [ ] `updateMember(client, memberId, data)` → admin update (plan, status, notes, desk assignment, nuki, alarm)
-- [ ] `pauseMember(client, memberId)` → set status paused, paused_at
-- [ ] `cancelMember(client, memberId)` → set cancel_requested_at (7-day notice starts)
+- [x] `updateMember(client, memberId, data)` → admin update (plan, status, notes, desk assignment, nuki, alarm)
+- [x] `pauseMember(client, memberId)` → set status paused, paused_at
+- [x] `cancelMember(client, memberId)` → set cancel_requested_at (7-day notice starts)
 
 ### Barrel Exports
-- [ ] `src/mutations/savage/index.ts`
-- [ ] Update `src/mutations/index.ts`
-- [ ] Update `src/index.ts`
+- [x] `src/mutations/savage/index.ts`
+- [x] Update `src/mutations/index.ts`
+- [x] Update `src/index.ts`
 
 ### Verify
-- [ ] Build passes
-- [ ] All mutations importable from root
+- [x] Build passes
+- [x] All mutations importable from root
 
 ---
 
@@ -282,22 +282,22 @@
 
 ---
 
-## Phase 9: `@nic/shared-ui` — Setup
+## Phase 9: `@nic/shared-ui` — Setup ⏳
 
 **Prerequisite**: Phase 3 complete (shared-types available).
 
 ### Dependencies
 - [ ] Add `@nic/shared-types` as dependency (file reference)
-- [ ] Add `react`, `react-dom` as peer dependencies
-- [ ] Add `typescript` as dev dependency
-- [ ] Update `tsconfig.json`: add `"jsx": "react-jsx"` to compilerOptions
+- [x] Add `react`, `react-dom` as peer dependencies
+- [x] Add `typescript` as dev dependency
+- [x] Update `tsconfig.json`: add `"jsx": "react-jsx"` to compilerOptions
 
 ### Barrel Export
-- [ ] `src/index.ts` — empty for now, will re-export components
+- [x] `src/index.ts` — empty for now, will re-export components
 - [ ] `src/components/index.ts`
 
 ### Verify
-- [ ] Build passes (empty but valid)
+- [x] Build passes (empty but valid)
 
 ---
 
