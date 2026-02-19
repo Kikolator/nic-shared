@@ -1,4 +1,4 @@
-import type { Database } from '../database';
+import type { Database } from '../database.js';
 
 // Row types
 export type SavageMember = Database['public']['Tables']['savage_members']['Row'];
@@ -54,4 +54,12 @@ export const PLAN_LABELS: Record<SavagePlanType, string> = {
   explorer: 'Explorer',
   nomad: 'Nomad',
   all_star: 'All-Star',
+} as const;
+
+export const MEMBER_STATUS_LABELS: Record<SavageMemberStatus, string> = {
+  active: 'Active',
+  paused: 'Paused',
+  past_due: 'Past Due',
+  cancelled: 'Cancelled',
+  churned: 'Churned',
 } as const;

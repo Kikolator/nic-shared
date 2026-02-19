@@ -1,4 +1,4 @@
-import type { Database } from '../database';
+import type { Database } from '../database.js';
 
 // Row types
 export type SharedProfile = Database['public']['Tables']['shared_profiles']['Row'];

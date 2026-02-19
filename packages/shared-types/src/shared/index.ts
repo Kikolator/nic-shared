@@ -1,3 +1,3 @@
-export * from './profiles';
-export * from './admins';
-export * from './perks';
+export * from './profiles.js';
+export * from './admins.js';
+export * from './perks.js';
