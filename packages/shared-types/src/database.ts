@@ -1,5 +1,3 @@
-// AUTO-GENERATED — DO NOT EDIT
-
 export type Json =
   | string
   | number
@@ -831,7 +829,11 @@ export type Database = {
         | "completed"
         | "cancelled"
         | "no_show"
-      savage_credit_source: "monthly_allowance" | "purchased" | "complimentary"
+      savage_credit_source:
+        | "monthly_allowance"
+        | "purchased"
+        | "complimentary"
+        | "refund"
       savage_credit_type: "desk" | "meeting_room"
       savage_lead_status:
         | "new"
@@ -1010,7 +1012,12 @@ export const Constants = {
         "cancelled",
         "no_show",
       ],
-      savage_credit_source: ["monthly_allowance", "purchased", "complimentary"],
+      savage_credit_source: [
+        "monthly_allowance",
+        "purchased",
+        "complimentary",
+        "refund",
+      ],
       savage_credit_type: ["desk", "meeting_room"],
       savage_lead_status: [
         "new",
