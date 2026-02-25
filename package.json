@@ -5,7 +5,7 @@
     "packages/*"
   ],
   "scripts": {
-    "build": "npm run build --workspaces",
-    "type-check": "npm run type-check --workspaces"
+    "build": "npm run build -w packages/shared-types && npm run build -w packages/perks-sdk && npm run build -w packages/api-client && npm run build -w packages/shared-ui",
+    "type-check": "npm run type-check -w packages/shared-types && npm run type-check -w packages/perks-sdk && npm run type-check -w packages/api-client && npm run type-check -w packages/shared-ui"
   }
 }
