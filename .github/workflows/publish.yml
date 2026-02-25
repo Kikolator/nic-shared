@@ -1,4 +1,4 @@
-name: Publish packages to GitHub Packages
+name: Publish packages to npm
 
 on:
   push:
@@ -9,14 +9,14 @@ jobs:
     runs-on: ubuntu-latest
     permissions:
       contents: read
-      packages: write
+      id-token: write
 
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
         with:
           node-version: 20
-          registry-url: https://npm.pkg.github.com
+          registry-url: https://registry.npmjs.org
       - name: Install dependencies
         run: npm ci
       - name: Build all packages
@@ -26,8 +26,6 @@ jobs:
           for pkg in packages/shared-types packages/perks-sdk packages/api-client packages/shared-ui; do
             echo "Publishing $pkg..."
             cd "$pkg"
-            npm publish --access public || echo "Skipped (already published or error)"
+            npm publish --access public --provenance || echo "Skipped (already published or error)"
             cd ../..
           done
-        env:
-          NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
