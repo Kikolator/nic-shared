@@ -1,5 +1,5 @@
 import type { Client } from '../../client';
-import type { SavageCredit, SavageCreditType } from '@nic/shared-types';
+import type { SavageCredit, SavageCreditType } from '@kikolator/shared-types';
 
 /** Get credit balance for a user and credit type (RPC) */
 export async function getCreditBalance(

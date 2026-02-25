@@ -1,5 +1,5 @@
 import { createClient as createSupabaseClient, SupabaseClient } from '@supabase/supabase-js';
-import type { Database } from '@nic/shared-types';
+import type { Database } from '@kikolator/shared-types';
 
 /** Typed Supabase client for the Nic Ecosystem database */
 export type Client = SupabaseClient<Database>;

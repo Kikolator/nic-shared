@@ -1,5 +1,5 @@
 import type { Client } from '../../client';
-import type { SavageResource, SavageResourceType } from '@nic/shared-types';
+import type { SavageResource, SavageResourceType } from '@kikolator/shared-types';
 
 /** Get resources, optionally filtered by type */
 export async function getResources(

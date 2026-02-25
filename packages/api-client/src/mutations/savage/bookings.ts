@@ -1,5 +1,5 @@
 import type { Client } from '../../client';
-import type { SavageBooking } from '@nic/shared-types';
+import type { SavageBooking } from '@kikolator/shared-types';
 
 interface CreateBookingInput {
   user_id: string;

@@ -1,5 +1,5 @@
 import type { Client } from '../../client';
-import type { SharedProfile, AppType } from '@nic/shared-types';
+import type { SharedProfile, AppType } from '@kikolator/shared-types';
 
 /** Get a user's profile by their auth user ID */
 export async function getProfile(

@@ -1,4 +1,4 @@
-// @nic/shared-types — root barrel export
+// @kikolator/shared-types — root barrel export
 
 // Database types (auto-generated)
 export type { Database, Json, Tables, TablesInsert, TablesUpdate, Enums, CompositeTypes } from './database.js';
