@@ -9,6 +9,7 @@ jobs:
     runs-on: ubuntu-latest
     permissions:
       contents: read
+      id-token: write
 
     steps:
       - uses: actions/checkout@v4
@@ -25,8 +26,6 @@ jobs:
           for pkg in packages/shared-types packages/perks-sdk packages/api-client packages/shared-ui; do
             echo "Publishing $pkg..."
             cd "$pkg"
-            npm publish --access public || echo "Skipped (already published or error)"
+            npm publish --access public --provenance || echo "Skipped (already published or error)"
             cd ../..
           done
-        env:
-          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
