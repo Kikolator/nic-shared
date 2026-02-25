@@ -1,5 +1,5 @@
 import type { Client } from '../../client';
-import type { SavageMember, SavageMemberUpdate } from '@nic/shared-types';
+import type { SavageMember, SavageMemberUpdate } from '@kikolator/shared-types';
 
 /** Update a member's details (admin) */
 export async function updateMember(

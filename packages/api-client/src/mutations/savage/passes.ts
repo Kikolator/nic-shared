@@ -1,5 +1,5 @@
 import type { Client } from '../../client';
-import type { SavagePass, SavagePassType } from '@nic/shared-types';
+import type { SavagePass, SavagePassType } from '@kikolator/shared-types';
 
 interface CreatePassInput {
   user_id: string;

@@ -1,5 +1,5 @@
 import type { Client } from '../../client';
-import type { SavageProduct, SavagePlanType } from '@nic/shared-types';
+import type { SavageProduct, SavagePlanType } from '@kikolator/shared-types';
 
 /** Get all active products (admin) */
 export async function getProducts(

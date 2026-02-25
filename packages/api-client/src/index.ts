@@ -1,4 +1,4 @@
-// @nic/api-client — root barrel export
+// @kikolator/api-client — root barrel export
 
 // Client factory
 export { createApiClient } from './client';

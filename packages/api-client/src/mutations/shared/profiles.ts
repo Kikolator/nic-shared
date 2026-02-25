@@ -1,5 +1,5 @@
 import type { Client } from '../../client';
-import type { SharedProfile, FiscalIdType } from '@nic/shared-types';
+import type { SharedProfile, FiscalIdType } from '@kikolator/shared-types';
 
 interface UpdateProfileInput {
   full_name?: string | null;

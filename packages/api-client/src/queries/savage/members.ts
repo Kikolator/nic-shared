@@ -5,7 +5,7 @@ import type {
   SharedProfile,
   SavagePlanType,
   SavageMemberStatus,
-} from '@nic/shared-types';
+} from '@kikolator/shared-types';
 
 /** Get a member by their auth user ID */
 export async function getMemberByUserId(

@@ -1,5 +1,5 @@
 import type { Client } from '../../client';
-import type { Database } from '@nic/shared-types';
+import type { Database } from '@kikolator/shared-types';
 
 type SavageMonthlyStats = Database['public']['Tables']['savage_monthly_stats']['Row'];
 type SavageDailyStats = Database['public']['Tables']['savage_daily_stats']['Row'];

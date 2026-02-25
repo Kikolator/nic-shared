@@ -1,5 +1,5 @@
 import type { Client } from '../../client';
-import type { SavagePass } from '@nic/shared-types';
+import type { SavagePass } from '@kikolator/shared-types';
 
 /** Get all passes for a user */
 export async function getPassesByUser(

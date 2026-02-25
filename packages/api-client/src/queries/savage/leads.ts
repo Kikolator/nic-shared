@@ -1,5 +1,5 @@
 import type { Client } from '../../client';
-import type { SavageLead, SavageLeadStatus } from '@nic/shared-types';
+import type { SavageLead, SavageLeadStatus } from '@kikolator/shared-types';
 
 interface LeadFilters {
   status?: SavageLeadStatus;
