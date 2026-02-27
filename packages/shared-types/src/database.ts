@@ -782,6 +782,18 @@ export type Database = {
         Args: { function_name: string; payload?: Json }
         Returns: undefined
       }
+      savage_activate_pass: {
+        Args: { p_stripe_session_id: string; p_user_id: string }
+        Returns: undefined
+      }
+      savage_add_purchased_credits: {
+        Args: {
+          p_product_id: string
+          p_stripe_session_id: string
+          p_user_id: string
+        }
+        Returns: undefined
+      }
       savage_auto_assign_desk: { Args: { p_pass_id: string }; Returns: string }
       savage_deduct_credits: {
         Args: {
@@ -809,6 +821,10 @@ export type Database = {
           slot_end: string
           slot_start: string
         }[]
+      }
+      savage_reset_monthly_credits: {
+        Args: { p_user_id: string }
+        Returns: undefined
       }
       savage_update_member_profile: {
         Args: { p_company?: string; p_role_title?: string }
