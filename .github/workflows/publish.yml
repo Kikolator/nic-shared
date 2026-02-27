@@ -15,8 +15,10 @@ jobs:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
         with:
-          node-version: 20
+          node-version: 22
           registry-url: https://registry.npmjs.org
+      - name: Update npm to latest
+        run: npm install -g npm@latest
       - name: Install dependencies
         run: npm ci
       - name: Build all packages
@@ -26,6 +28,13 @@ jobs:
           for pkg in packages/shared-types packages/perks-sdk packages/api-client packages/shared-ui; do
             echo "Publishing $pkg..."
             cd "$pkg"
-            npm publish --access public --provenance || echo "Skipped (already published or error)"
+            npm publish --access public 2>&1 | tee /tmp/npm-publish.log || {
+              if grep -q "previously published\|You cannot publish over" /tmp/npm-publish.log; then
+                echo "Skipped $pkg (already published)"
+              else
+                echo "Failed to publish $pkg"
+                exit 1
+              fi
+            }
             cd ../..
           done
