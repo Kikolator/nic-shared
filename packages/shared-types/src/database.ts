@@ -810,6 +810,10 @@ export type Database = {
           slot_start: string
         }[]
       }
+      savage_update_member_profile: {
+        Args: { p_company?: string; p_role_title?: string }
+        Returns: Json
+      }
       shared_is_admin: {
         Args: {
           p_app?: Database["public"]["Enums"]["app_type"]
