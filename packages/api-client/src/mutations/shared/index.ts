@@ -1,1 +1,1 @@
-export { updateProfile, updateFiscalId } from './profiles';
+export { updateProfile, updateBillingInfo } from './profiles';

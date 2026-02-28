@@ -247,7 +247,6 @@ export type Database = {
           alarm_approved: boolean | null
           cancel_requested_at: string | null
           cancelled_at: string | null
-          company: string | null
           created_at: string | null
           fixed_desk_id: string | null
           has_twenty_four_seven: boolean | null
@@ -256,7 +255,6 @@ export type Database = {
           nuki_code: string | null
           paused_at: string | null
           plan: Database["public"]["Enums"]["savage_plan_type"]
-          role_title: string | null
           status: Database["public"]["Enums"]["savage_member_status"]
           stripe_customer_id: string | null
           stripe_subscription_id: string | null
@@ -269,7 +267,6 @@ export type Database = {
           alarm_approved?: boolean | null
           cancel_requested_at?: string | null
           cancelled_at?: string | null
-          company?: string | null
           created_at?: string | null
           fixed_desk_id?: string | null
           has_twenty_four_seven?: boolean | null
@@ -278,7 +275,6 @@ export type Database = {
           nuki_code?: string | null
           paused_at?: string | null
           plan: Database["public"]["Enums"]["savage_plan_type"]
-          role_title?: string | null
           status?: Database["public"]["Enums"]["savage_member_status"]
           stripe_customer_id?: string | null
           stripe_subscription_id?: string | null
@@ -291,7 +287,6 @@ export type Database = {
           alarm_approved?: boolean | null
           cancel_requested_at?: string | null
           cancelled_at?: string | null
-          company?: string | null
           created_at?: string | null
           fixed_desk_id?: string | null
           has_twenty_four_seven?: boolean | null
@@ -300,7 +295,6 @@ export type Database = {
           nuki_code?: string | null
           paused_at?: string | null
           plan?: Database["public"]["Enums"]["savage_plan_type"]
-          role_title?: string | null
           status?: Database["public"]["Enums"]["savage_member_status"]
           stripe_customer_id?: string | null
           stripe_subscription_id?: string | null
@@ -722,9 +716,16 @@ export type Database = {
           billing_address_line1: string | null
           billing_address_line2: string | null
           billing_city: string | null
+          billing_company_name: string | null
+          billing_company_tax_id: string | null
+          billing_company_tax_id_type:
+            | Database["public"]["Enums"]["fiscal_id_type"]
+            | null
           billing_country: string | null
+          billing_entity_type: string | null
           billing_postal_code: string | null
-          billing_province: string | null
+          billing_state_province: string | null
+          company: string | null
           created_at: string | null
           email: string
           fiscal_id: string | null
@@ -733,6 +734,7 @@ export type Database = {
           id: string
           phone: string | null
           preferred_lang: string | null
+          role_title: string | null
           updated_at: string | null
         }
         Insert: {
@@ -740,9 +742,16 @@ export type Database = {
           billing_address_line1?: string | null
           billing_address_line2?: string | null
           billing_city?: string | null
+          billing_company_name?: string | null
+          billing_company_tax_id?: string | null
+          billing_company_tax_id_type?:
+            | Database["public"]["Enums"]["fiscal_id_type"]
+            | null
           billing_country?: string | null
+          billing_entity_type?: string | null
           billing_postal_code?: string | null
-          billing_province?: string | null
+          billing_state_province?: string | null
+          company?: string | null
           created_at?: string | null
           email: string
           fiscal_id?: string | null
@@ -751,6 +760,7 @@ export type Database = {
           id: string
           phone?: string | null
           preferred_lang?: string | null
+          role_title?: string | null
           updated_at?: string | null
         }
         Update: {
@@ -758,9 +768,16 @@ export type Database = {
           billing_address_line1?: string | null
           billing_address_line2?: string | null
           billing_city?: string | null
+          billing_company_name?: string | null
+          billing_company_tax_id?: string | null
+          billing_company_tax_id_type?:
+            | Database["public"]["Enums"]["fiscal_id_type"]
+            | null
           billing_country?: string | null
+          billing_entity_type?: string | null
           billing_postal_code?: string | null
-          billing_province?: string | null
+          billing_state_province?: string | null
+          company?: string | null
           created_at?: string | null
           email?: string
           fiscal_id?: string | null
@@ -769,6 +786,7 @@ export type Database = {
           id?: string
           phone?: string | null
           preferred_lang?: string | null
+          role_title?: string | null
           updated_at?: string | null
         }
         Relationships: []
@@ -826,10 +844,6 @@ export type Database = {
         Args: { p_user_id: string }
         Returns: undefined
       }
-      savage_update_member_profile: {
-        Args: { p_company?: string; p_role_title?: string }
-        Returns: Json
-      }
       shared_is_admin: {
         Args: {
           p_app?: Database["public"]["Enums"]["app_type"]
@@ -840,7 +854,14 @@ export type Database = {
     }
     Enums: {
       app_type: "savage" | "musa" | "listy"
-      fiscal_id_type: "nif" | "nie" | "passport" | "cif"
+      fiscal_id_type:
+        | "nif"
+        | "nie"
+        | "passport"
+        | "cif"
+        | "eu_vat"
+        | "foreign_tax_id"
+        | "other"
       savage_access_level: "none" | "business_hours" | "twenty_four_seven"
       savage_booking_status:
         | "pending_payment"
@@ -1022,7 +1043,15 @@ export const Constants = {
   public: {
     Enums: {
       app_type: ["savage", "musa", "listy"],
-      fiscal_id_type: ["nif", "nie", "passport", "cif"],
+      fiscal_id_type: [
+        "nif",
+        "nie",
+        "passport",
+        "cif",
+        "eu_vat",
+        "foreign_tax_id",
+        "other",
+      ],
       savage_access_level: ["none", "business_hours", "twenty_four_seven"],
       savage_booking_status: [
         "pending_payment",
