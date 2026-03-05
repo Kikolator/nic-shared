@@ -1,5 +1,5 @@
 import type { Client } from '../../client';
-import type { SavageCredit, SavageCreditType } from '@kikolator/shared-types';
+import type { SavageCreditGrant, SavageCreditType } from '@kikolator/shared-types';
 
 /** Get credit balance for a user and credit type (RPC) */
 export async function getCreditBalance(
@@ -16,14 +16,14 @@ export async function getCreditBalance(
   return data ?? 0;
 }
 
-/** Get credit history for a user, optionally filtered by credit type */
+/** Get credit grant history for a user, optionally filtered by credit type */
 export async function getCreditHistory(
   client: Client,
   userId: string,
   creditType?: SavageCreditType
-): Promise<SavageCredit[]> {
+): Promise<SavageCreditGrant[]> {
   let query = client
-    .from('savage_credits')
+    .from('savage_credit_grants')
     .select('*')
     .eq('user_id', userId);
 

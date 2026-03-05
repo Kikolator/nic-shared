@@ -1,10 +1,10 @@
 import type { Database } from '../database.js';
 
 // Row types
-export type SavageCredit = Database['public']['Tables']['savage_credits']['Row'];
-export type SavageCreditInsert = Database['public']['Tables']['savage_credits']['Insert'];
+export type SavageCreditGrant = Database['public']['Tables']['savage_credit_grants']['Row'];
+export type SavageCreditGrantInsert = Database['public']['Tables']['savage_credit_grants']['Insert'];
+export type SavageCreditGrantUpdate = Database['public']['Tables']['savage_credit_grants']['Update'];
 
 // Enum types
 export type SavageCreditType = Database['public']['Enums']['savage_credit_type'];
-export type SavageCreditSource = Database['public']['Enums']['savage_credit_source'];
-
+export type SavageCreditGrantSource = Database['public']['Enums']['savage_credit_grant_source'];
