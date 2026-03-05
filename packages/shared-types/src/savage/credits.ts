@@ -8,3 +8,6 @@ export type SavageCreditGrantUpdate = Database['public']['Tables']['savage_credi
 // Enum types
 export type SavageCreditType = Database['public']['Enums']['savage_credit_type'];
 export type SavageCreditGrantSource = Database['public']['Enums']['savage_credit_grant_source'];
+
+// RPC return types
+export type SavageCreditBalance = Database['public']['Functions']['savage_get_credit_balance']['Returns'][number];
