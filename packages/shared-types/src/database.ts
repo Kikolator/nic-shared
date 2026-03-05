@@ -34,6 +34,45 @@ export type Database = {
   }
   public: {
     Tables: {
+      savage_booking_credit_deductions: {
+        Row: {
+          booking_id: string
+          created_at: string
+          grant_id: string
+          id: string
+          minutes: number
+        }
+        Insert: {
+          booking_id: string
+          created_at?: string
+          grant_id: string
+          id?: string
+          minutes: number
+        }
+        Update: {
+          booking_id?: string
+          created_at?: string
+          grant_id?: string
+          id?: string
+          minutes?: number
+        }
+        Relationships: [
+          {
+            foreignKeyName: "savage_booking_credit_deductions_booking_id_fkey"
+            columns: ["booking_id"]
+            isOneToOne: false
+            referencedRelation: "savage_bookings"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "savage_booking_credit_deductions_grant_id_fkey"
+            columns: ["grant_id"]
+            isOneToOne: false
+            referencedRelation: "savage_credit_grants"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       savage_bookings: {
         Row: {
           amount_cents: number | null
@@ -41,6 +80,11 @@ export type Database = {
           cancelled_at: string | null
           checked_in_at: string | null
           created_at: string | null
+          credit_type_used:
+            | Database["public"]["Enums"]["savage_credit_type"]
+            | null
+          credits_deducted: number | null
+          duration_minutes: number | null
           end_time: string
           id: string
           recurring_rule_id: string | null
@@ -58,6 +102,11 @@ export type Database = {
           cancelled_at?: string | null
           checked_in_at?: string | null
           created_at?: string | null
+          credit_type_used?:
+            | Database["public"]["Enums"]["savage_credit_type"]
+            | null
+          credits_deducted?: number | null
+          duration_minutes?: number | null
           end_time: string
           id?: string
           recurring_rule_id?: string | null
@@ -75,6 +124,11 @@ export type Database = {
           cancelled_at?: string | null
           checked_in_at?: string | null
           created_at?: string | null
+          credit_type_used?:
+            | Database["public"]["Enums"]["savage_credit_type"]
+            | null
+          credits_deducted?: number | null
+          duration_minutes?: number | null
           end_time?: string
           id?: string
           recurring_rule_id?: string | null
@@ -103,55 +157,53 @@ export type Database = {
           },
         ]
       }
-      savage_credits: {
+      savage_credit_grants: {
         Row: {
           amount_minutes: number
-          balance_after: number
-          booking_id: string | null
-          created_at: string | null
+          created_at: string
           credit_type: Database["public"]["Enums"]["savage_credit_type"]
-          description: string | null
           id: string
-          period_end: string | null
-          period_start: string | null
-          source: Database["public"]["Enums"]["savage_credit_source"]
+          metadata: Json | null
+          source: Database["public"]["Enums"]["savage_credit_grant_source"]
+          stripe_invoice_id: string | null
+          stripe_line_item_id: string | null
+          updated_at: string
+          used_minutes: number
           user_id: string
+          valid_from: string
+          valid_until: string | null
         }
         Insert: {
           amount_minutes: number
-          balance_after: number
-          booking_id?: string | null
-          created_at?: string | null
+          created_at?: string
           credit_type: Database["public"]["Enums"]["savage_credit_type"]
-          description?: string | null
           id?: string
-          period_end?: string | null
-          period_start?: string | null
-          source: Database["public"]["Enums"]["savage_credit_source"]
+          metadata?: Json | null
+          source: Database["public"]["Enums"]["savage_credit_grant_source"]
+          stripe_invoice_id?: string | null
+          stripe_line_item_id?: string | null
+          updated_at?: string
+          used_minutes?: number
           user_id: string
+          valid_from?: string
+          valid_until?: string | null
         }
         Update: {
           amount_minutes?: number
-          balance_after?: number
-          booking_id?: string | null
-          created_at?: string | null
+          created_at?: string
           credit_type?: Database["public"]["Enums"]["savage_credit_type"]
-          description?: string | null
           id?: string
-          period_end?: string | null
-          period_start?: string | null
-          source?: Database["public"]["Enums"]["savage_credit_source"]
+          metadata?: Json | null
+          source?: Database["public"]["Enums"]["savage_credit_grant_source"]
+          stripe_invoice_id?: string | null
+          stripe_line_item_id?: string | null
+          updated_at?: string
+          used_minutes?: number
           user_id?: string
+          valid_from?: string
+          valid_until?: string | null
         }
-        Relationships: [
-          {
-            foreignKeyName: "savage_credits_booking_id_fkey"
-            columns: ["booking_id"]
-            isOneToOne: false
-            referencedRelation: "savage_bookings"
-            referencedColumns: ["id"]
-          },
-        ]
+        Relationships: []
       }
       savage_daily_stats: {
         Row: {
@@ -454,6 +506,36 @@ export type Database = {
           stripe_customer_id?: string | null
           stripe_event_id?: string
           user_id?: string | null
+        }
+        Relationships: []
+      }
+      savage_plan_credits: {
+        Row: {
+          created_at: string | null
+          credit_type: Database["public"]["Enums"]["savage_credit_type"]
+          id: string
+          is_unlimited: boolean
+          monthly_minutes: number
+          plan: Database["public"]["Enums"]["savage_plan_type"]
+          updated_at: string | null
+        }
+        Insert: {
+          created_at?: string | null
+          credit_type: Database["public"]["Enums"]["savage_credit_type"]
+          id?: string
+          is_unlimited?: boolean
+          monthly_minutes: number
+          plan: Database["public"]["Enums"]["savage_plan_type"]
+          updated_at?: string | null
+        }
+        Update: {
+          created_at?: string | null
+          credit_type?: Database["public"]["Enums"]["savage_credit_type"]
+          id?: string
+          is_unlimited?: boolean
+          monthly_minutes?: number
+          plan?: Database["public"]["Enums"]["savage_plan_type"]
+          updated_at?: string | null
         }
         Relationships: []
       }
@@ -804,30 +886,36 @@ export type Database = {
         Args: { p_stripe_session_id: string; p_user_id: string }
         Returns: undefined
       }
-      savage_add_purchased_credits: {
-        Args: {
-          p_product_id: string
-          p_stripe_session_id: string
-          p_user_id: string
-        }
-        Returns: undefined
-      }
       savage_auto_assign_desk: { Args: { p_pass_id: string }; Returns: string }
-      savage_deduct_credits: {
+      savage_cancel_booking_refund_credits: {
+        Args: { p_booking_id: string; p_user_id: string }
+        Returns: Json
+      }
+      savage_create_booking_with_credits: {
         Args: {
-          p_booking_id?: string
-          p_credit_type: Database["public"]["Enums"]["savage_credit_type"]
-          p_minutes: number
+          p_end_time: string
+          p_resource_id: string
+          p_start_time: string
           p_user_id: string
         }
-        Returns: boolean
+        Returns: Json
+      }
+      savage_expire_renewable_credits: {
+        Args: { p_user_id: string }
+        Returns: number
       }
       savage_get_credit_balance: {
         Args: {
           p_credit_type: Database["public"]["Enums"]["savage_credit_type"]
           p_user_id: string
         }
-        Returns: number
+        Returns: {
+          available_minutes: number
+          purchased_available: number
+          renewable_available: number
+          total_minutes: number
+          used_minutes: number
+        }[]
       }
       savage_get_desk_availability: {
         Args: { p_date: string }
@@ -840,9 +928,19 @@ export type Database = {
           slot_start: string
         }[]
       }
-      savage_reset_monthly_credits: {
-        Args: { p_user_id: string }
-        Returns: undefined
+      savage_grant_credits: {
+        Args: {
+          p_amount_minutes: number
+          p_credit_type: Database["public"]["Enums"]["savage_credit_type"]
+          p_metadata?: Json
+          p_source: Database["public"]["Enums"]["savage_credit_grant_source"]
+          p_stripe_invoice_id?: string
+          p_stripe_line_item_id?: string
+          p_user_id: string
+          p_valid_from?: string
+          p_valid_until?: string
+        }
+        Returns: string
       }
       shared_is_admin: {
         Args: {
@@ -870,10 +968,10 @@ export type Database = {
         | "completed"
         | "cancelled"
         | "no_show"
-      savage_credit_source:
-        | "monthly_allowance"
-        | "purchased"
-        | "complimentary"
+      savage_credit_grant_source:
+        | "subscription"
+        | "purchase"
+        | "manual"
         | "refund"
       savage_credit_type: "desk" | "meeting_room"
       savage_lead_status:
@@ -1061,10 +1159,10 @@ export const Constants = {
         "cancelled",
         "no_show",
       ],
-      savage_credit_source: [
-        "monthly_allowance",
-        "purchased",
-        "complimentary",
+      savage_credit_grant_source: [
+        "subscription",
+        "purchase",
+        "manual",
         "refund",
       ],
       savage_credit_type: ["desk", "meeting_room"],
