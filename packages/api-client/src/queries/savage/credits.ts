@@ -7,13 +7,15 @@ export async function getCreditBalance(
   userId: string,
   creditType: SavageCreditType
 ): Promise<SavageCreditBalance | null> {
-  const { data, error } = await client.rpc('savage_get_credit_balance', {
-    p_user_id: userId,
-    p_credit_type: creditType,
-  });
+  const { data, error } = await client
+    .rpc('savage_get_credit_balance', {
+      p_user_id: userId,
+      p_credit_type: creditType,
+    })
+    .single();
 
   if (error) return null;
-  return data?.[0] ?? null;
+  return data;
 }
 
 /** Get credit grant history for a user, optionally filtered by credit type */
