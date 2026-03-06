@@ -60,6 +60,6 @@ export const MEMBER_STATUS_LABELS: Record<SavageMemberStatus, string> = {
   active: 'Active',
   paused: 'Paused',
   past_due: 'Past Due',
-  cancelled: 'Cancelled',
+  cancelling: 'Cancelling',
   churned: 'Churned',
 } as const;

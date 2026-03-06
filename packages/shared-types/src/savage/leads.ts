@@ -11,6 +11,7 @@ export type SavageLeadStatus = Database['public']['Enums']['savage_lead_status']
 // Display labels
 export const LEAD_STATUS_LABELS: Record<SavageLeadStatus, string> = {
   new: 'New',
+  invited: 'Invited',
   confirmed: 'Confirmed',
   completed: 'Completed',
   follow_up: 'Follow Up',
@@ -24,6 +25,7 @@ export const LEAD_STATUS_LABELS: Record<SavageLeadStatus, string> = {
 export function isConvertibleLead(lead: SavageLead): boolean {
   return (
     lead.status === 'new' ||
+    lead.status === 'invited' ||
     lead.status === 'confirmed' ||
     lead.status === 'completed' ||
     lead.status === 'follow_up'
