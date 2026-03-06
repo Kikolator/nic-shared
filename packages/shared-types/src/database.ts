@@ -308,7 +308,6 @@ export type Database = {
           paused_at: string | null
           plan: Database["public"]["Enums"]["savage_plan_type"]
           status: Database["public"]["Enums"]["savage_member_status"]
-          stripe_customer_id: string | null
           stripe_subscription_id: string | null
           updated_at: string | null
           user_id: string
@@ -328,7 +327,6 @@ export type Database = {
           paused_at?: string | null
           plan: Database["public"]["Enums"]["savage_plan_type"]
           status?: Database["public"]["Enums"]["savage_member_status"]
-          stripe_customer_id?: string | null
           stripe_subscription_id?: string | null
           updated_at?: string | null
           user_id: string
@@ -348,7 +346,6 @@ export type Database = {
           paused_at?: string | null
           plan?: Database["public"]["Enums"]["savage_plan_type"]
           status?: Database["public"]["Enums"]["savage_member_status"]
-          stripe_customer_id?: string | null
           stripe_subscription_id?: string | null
           updated_at?: string | null
           user_id?: string
@@ -817,6 +814,7 @@ export type Database = {
           phone: string | null
           preferred_lang: string | null
           role_title: string | null
+          stripe_customer_id: string | null
           updated_at: string | null
         }
         Insert: {
@@ -843,6 +841,7 @@ export type Database = {
           phone?: string | null
           preferred_lang?: string | null
           role_title?: string | null
+          stripe_customer_id?: string | null
           updated_at?: string | null
         }
         Update: {
@@ -869,6 +868,7 @@ export type Database = {
           phone?: string | null
           preferred_lang?: string | null
           role_title?: string | null
+          stripe_customer_id?: string | null
           updated_at?: string | null
         }
         Relationships: []
