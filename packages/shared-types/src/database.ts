@@ -976,6 +976,7 @@ export type Database = {
       savage_credit_type: "desk" | "meeting_room"
       savage_lead_status:
         | "new"
+        | "invited"
         | "confirmed"
         | "completed"
         | "follow_up"
@@ -985,7 +986,7 @@ export type Database = {
         | "active"
         | "paused"
         | "past_due"
-        | "cancelled"
+        | "cancelling"
         | "churned"
       savage_pass_status:
         | "pending_payment"
@@ -1168,6 +1169,7 @@ export const Constants = {
       savage_credit_type: ["desk", "meeting_room"],
       savage_lead_status: [
         "new",
+        "invited",
         "confirmed",
         "completed",
         "follow_up",
@@ -1178,7 +1180,7 @@ export const Constants = {
         "active",
         "paused",
         "past_due",
-        "cancelled",
+        "cancelling",
         "churned",
       ],
       savage_pass_status: [
