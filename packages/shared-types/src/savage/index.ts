@@ -5,3 +5,6 @@ export * from './resources.js';
 export * from './passes.js';
 export * from './credits.js';
 export * from './leads.js';
+export * from './stats.js';
+export * from './rate-config.js';
+export * from './payments.js';

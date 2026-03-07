@@ -1,8 +1,5 @@
 import type { Client } from '../../client';
-import type { Database } from '@kikolator/shared-types';
-
-type SavageMonthlyStats = Database['public']['Tables']['savage_monthly_stats']['Row'];
-type SavageDailyStats = Database['public']['Tables']['savage_daily_stats']['Row'];
+import type { SavageMonthlyStats, SavageDailyStats } from '@kikolator/shared-types';
 
 /** Get monthly stats for the last N months (admin) */
 export async function getMonthlyStats(

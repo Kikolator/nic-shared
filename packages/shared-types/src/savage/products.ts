@@ -1,4 +1,6 @@
 import type { Database } from '../database.js';
+import type { SavagePlanType } from './members.js';
+import type { SavageCreditType } from './credits.js';
 
 // Row types
 export type SavageProduct = Database['public']['Tables']['savage_products']['Row'];
@@ -7,6 +9,40 @@ export type SavageProductUpdate = Database['public']['Tables']['savage_products'
 
 // Enum types
 export type SavageProductCategory = Database['public']['Enums']['savage_product_category'];
+
+// JSON column types
+
+export interface VisibilityRules {
+  members_only?: boolean;
+  non_members_only?: boolean;
+  plans?: SavagePlanType[];
+  exclude_unlimited?: boolean;
+}
+
+export interface CreditGrantConfig {
+  credit_type: SavageCreditType;
+  minutes: number;
+}
+
+// Purchase flow pseudo-enum (CHECK constraint, not a DB enum)
+export const PURCHASE_FLOWS = ['checkout', 'subscription', 'date_picker', 'subscription_addon'] as const;
+export type PurchaseFlow = typeof PURCHASE_FLOWS[number];
+
+// Type guards
+
+/** Narrow the Json | null credit_grant_config column */
+export function hasCreditGrantConfig(
+  product: SavageProduct
+): product is SavageProduct & { credit_grant_config: CreditGrantConfig } {
+  const cfg = product.credit_grant_config;
+  return (
+    cfg !== null &&
+    typeof cfg === 'object' &&
+    !Array.isArray(cfg) &&
+    'credit_type' in cfg &&
+    'minutes' in cfg
+  );
+}
 
 // Helpers
 
