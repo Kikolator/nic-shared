@@ -427,7 +427,9 @@ export type Database = {
           created_at: string | null
           end_date: string
           id: string
+          is_guest: boolean
           pass_type: Database["public"]["Enums"]["savage_pass_type"]
+          purchased_by: string | null
           start_date: string
           status: Database["public"]["Enums"]["savage_pass_status"]
           stripe_session_id: string | null
@@ -440,7 +442,9 @@ export type Database = {
           created_at?: string | null
           end_date: string
           id?: string
+          is_guest?: boolean
           pass_type: Database["public"]["Enums"]["savage_pass_type"]
+          purchased_by?: string | null
           start_date: string
           status?: Database["public"]["Enums"]["savage_pass_status"]
           stripe_session_id?: string | null
@@ -453,7 +457,9 @@ export type Database = {
           created_at?: string | null
           end_date?: string
           id?: string
+          is_guest?: boolean
           pass_type?: Database["public"]["Enums"]["savage_pass_type"]
+          purchased_by?: string | null
           start_date?: string
           status?: Database["public"]["Enums"]["savage_pass_status"]
           stripe_session_id?: string | null
@@ -541,6 +547,7 @@ export type Database = {
           active: boolean | null
           category: Database["public"]["Enums"]["savage_product_category"]
           created_at: string | null
+          credit_grant_config: Json | null
           currency: string
           description: string | null
           desk_hours: number | null
@@ -550,20 +557,19 @@ export type Database = {
           name: string
           plan_type: Database["public"]["Enums"]["savage_plan_type"] | null
           price_cents: number
+          purchase_flow: string
           slug: string
           sort_order: number | null
           stripe_price_id: string | null
           stripe_product_id: string | null
           updated_at: string | null
-          visible_to_non_members: boolean | null
-          visible_to_plans:
-            | Database["public"]["Enums"]["savage_plan_type"][]
-            | null
+          visibility_rules: Json
         }
         Insert: {
           active?: boolean | null
           category: Database["public"]["Enums"]["savage_product_category"]
           created_at?: string | null
+          credit_grant_config?: Json | null
           currency?: string
           description?: string | null
           desk_hours?: number | null
@@ -573,20 +579,19 @@ export type Database = {
           name: string
           plan_type?: Database["public"]["Enums"]["savage_plan_type"] | null
           price_cents: number
+          purchase_flow?: string
           slug: string
           sort_order?: number | null
           stripe_price_id?: string | null
           stripe_product_id?: string | null
           updated_at?: string | null
-          visible_to_non_members?: boolean | null
-          visible_to_plans?:
-            | Database["public"]["Enums"]["savage_plan_type"][]
-            | null
+          visibility_rules?: Json
         }
         Update: {
           active?: boolean | null
           category?: Database["public"]["Enums"]["savage_product_category"]
           created_at?: string | null
+          credit_grant_config?: Json | null
           currency?: string
           description?: string | null
           desk_hours?: number | null
@@ -596,15 +601,43 @@ export type Database = {
           name?: string
           plan_type?: Database["public"]["Enums"]["savage_plan_type"] | null
           price_cents?: number
+          purchase_flow?: string
           slug?: string
           sort_order?: number | null
           stripe_price_id?: string | null
           stripe_product_id?: string | null
           updated_at?: string | null
-          visible_to_non_members?: boolean | null
-          visible_to_plans?:
-            | Database["public"]["Enums"]["savage_plan_type"][]
-            | null
+          visibility_rules?: Json
+        }
+        Relationships: []
+      }
+      savage_rate_config: {
+        Row: {
+          created_at: string | null
+          currency: string
+          id: string
+          iva_rate: number
+          rate_cents: number
+          resource_type: Database["public"]["Enums"]["savage_resource_type"]
+          updated_at: string | null
+        }
+        Insert: {
+          created_at?: string | null
+          currency?: string
+          id?: string
+          iva_rate?: number
+          rate_cents: number
+          resource_type: Database["public"]["Enums"]["savage_resource_type"]
+          updated_at?: string | null
+        }
+        Update: {
+          created_at?: string | null
+          currency?: string
+          id?: string
+          iva_rate?: number
+          rate_cents?: number
+          resource_type?: Database["public"]["Enums"]["savage_resource_type"]
+          updated_at?: string | null
         }
         Relationships: []
       }
@@ -1001,13 +1034,7 @@ export type Database = {
         | "explorer"
         | "nomad"
         | "all_star"
-      savage_product_category:
-        | "subscription"
-        | "pass"
-        | "room_booking"
-        | "hour_bundle"
-        | "addon"
-        | "guest_pass"
+      savage_product_category: "subscription" | "pass" | "hour_bundle" | "addon"
       savage_recurrence_pattern: "daily" | "weekly" | "biweekly"
       savage_resource_status: "available" | "occupied" | "out_of_service"
       savage_resource_type: "desk" | "meeting_room" | "podcast_room"
@@ -1198,14 +1225,7 @@ export const Constants = {
         "nomad",
         "all_star",
       ],
-      savage_product_category: [
-        "subscription",
-        "pass",
-        "room_booking",
-        "hour_bundle",
-        "addon",
-        "guest_pass",
-      ],
+      savage_product_category: ["subscription", "pass", "hour_bundle", "addon"],
       savage_recurrence_pattern: ["daily", "weekly", "biweekly"],
       savage_resource_status: ["available", "occupied", "out_of_service"],
       savage_resource_type: ["desk", "meeting_room", "podcast_room"],

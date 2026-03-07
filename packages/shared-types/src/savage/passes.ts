@@ -18,3 +18,8 @@ export function isActivePass(pass: SavagePass): boolean {
   const end = new Date(pass.end_date);
   return pass.status === 'active' && now >= start && now <= end;
 }
+
+/** Check if a pass was purchased for a guest */
+export function isGuestPass(pass: SavagePass): boolean {
+  return pass.is_guest;
+}
